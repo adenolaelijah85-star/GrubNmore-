@@ -285,6 +285,32 @@ main{max-width:var(--max-width);margin:24px auto;padding:0 18px;min-height:60vh}
   font-size: 14px;
   color: #bbb;
 }
+.price {
+  margin-top: 8px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.new-price {
+  color: #d62828;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.discount-badge {
+  background: #ffc107;
+  color: #000;
+  font-weight: 600;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 6px;
+}
 
 /* responsive */
 @media (max-width:900px){

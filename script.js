@@ -1,39 +1,38 @@
 /* ===== Elijah site - single-index multi-page (hash routing) ===== */
 
 /* ----- Configuration ----- */
+function applyDiscount(price){
+  return Math.round(price * 0.8); // 20% off
+}
 const WHATSAPP_NUMBER = '+2349114854561'; // your number for wa.me
 const MENU = [
   // --- 🍳RICE/NOODLES  ---
   {id:'fried-egg', name:'Chicken jollof combo + free coke', price:5600, img:'image/img (1).webp', category:'breakfast', description:'Rich, smoky party-style Jollof Rice served with tender grilled chicken and golden fried plantain — paired with a refreshing Free Coca-Cola drink. A classic combo that tastes like home and feels like joy.'},
   {id:'plantain-egg', name:'Steamed White Rice (Full Portion)', price:2800, img:'image/image 2.webp', category:'breakfast',description:'A vibrant, flavor-packed bowl of our signature fried rice, generously loaded with crunchy vegetables, sweetcorn, and tender shredded proteins. Each spoon delivers a savory medley of textures '},
-  {id:'naija-noodles-egg', name:'Steamed White Rice (Full Portion)', price:1200, img:'image/image3.webp', category:'breakfast',description:'A vibrant, flavor-packed bowl of our signature fried rice, generously loaded with crunchy vegetables, sweetcorn, and tender shredded proteins. Each spoon delivers a savory medley of textures '},
-  
+  {id:'naija-noodles-egg', name:'Steamed White Rice (Full Portion) - small', price:1200, img:'image/image3.webp', category:'breakfast',description:'A vibrant, flavor-packed bowl of our signature fried rice, generously loaded with crunchy vegetables, sweetcorn, and tender shredded proteins. Each spoon delivers a savory medley of textures '},
 
   // --- 🍛PASTA BOWL/PROTEIN ---
   {id:'jollof', name:'Stir-fry pasta ( no protein)', price:3120, img:'image/image4.webp', category:'lunch',description:'A vibrant, flavor-packed bowl of our signature fried rice, generously loaded with crunchy vegetables, sweetcorn, and tender shredded proteins. Each spoon delivers a savory medley of textures '},
   {id:'fried-rice', name:'Spicy naija pasta & full chicken lap', price:7920, img:'image/image5.webp', category:'lunch',description:'A vibrant, flavor-packed bowl of our signature fried rice, generously loaded with crunchy vegetables, sweetcorn, and tender shredded proteins. Each spoon delivers a savory medley of textures '},
   {id:'pepper-turkey', name:'Spicy naija pasta with turkey', price:10000, img:'image/image 6.webp', category:'lunch',description:'Satisfy your cravings with a bold 250g serving of our signature Spicy Naija Pasta — loaded with fire-roasted pepper sauce, stir-fried to perfection with caramelized onions and a hint of smoky heat in every bite, pair it your way either with chicken wings , chicken lap or turkey'},
-  
 
   // --- 🌆 PEPPER SOAP / EWAAGANYIN(BEANS)---
   {id:'noodles-turkey', name:'Chicken Pepper Soup (4pcs)', price:4800, img:'image/image7.webp', category:'dinner',description:'4 big pieces of soft, tender chicken pieces slow-cooked in a spicy, aromatic pepper soup blend of ginger, garlic, scent leaf, and fresh pepper. Light, healthy, and flavorful — a refreshing twist for those who prefer a mild but tasty broth.'},
   {id:'catfish', name:'Full Catfish Pepper Soup ( 4Pcs )', price:9591, img:'image/image 8.webp', category:'dinner',description:'4 Big fresh catfish seasoned and simmered in a spicy, aromatic pepper soup mix with scent leaf and local spices. Each bowl is light, peppery, and bursting with flavor — a true Lagos favorite for fish lovers.'},
   {id:'half-chicken', name:'Half Catfish Pepper Soup (2Pcs)', price:4800, img:'image/image 8.webp', category:'dinner',description:'2 big fresh catfish seasoned and simmered in a spicy, aromatic pepper soup mix with scent leaf and local spices. Each bowl is light, peppery, and bursting with flavor'},
   {id:'fried-rice-egg', name:'Assorted Meat Pepper Soup', price:4800, img:'image/image 9.webp', category:'dinner',description:'Crispy potato chips, fresh salad mix, seasoned chicken, and our signature creamy house sauce , all rolled into a soft tortilla for the perfect crunch-meets-creamy experience.'},
-  
 
   // --- 🍗SHAWARMA / BURRITOS ---
   {id:'chips', name:'Large Suya Beef Shawarma ( 2 Sausage )', price:4800, img:'image/image 10.webp', category:'snacks',description:'Tender spiced suya beef, sausage and strips layered with crunchy veggies and our rich, creamy house sauce, rolled up in a warm tortilla for that perfect smoky bite. Bold, meaty, and irresistibly good'},
   {id:'dodo', name:'Medium Suya Beef Shawarma ( 1 Sausage )', price:4000, img:'image/image 10.webp', category:'snacks',description:'Juicy grilled suya beef, Sausage, fresh veggies, and our signature creamy sauce, all wrapped in a soft tortilla and lightly toasted to perfection. Deliciously saucy, flavorful, and satisfying in every bite.'},
   {id:'suya', name:'Large Chicken Shawarma (2 Sausage )', price:4400, img:'image/image (11).webp', category:'snacks',description:'Tender spiced bee, with sausage and strips layered with crunchy veggies and our rich, creamy house sauce, rolled up in a warm tortilla for that perfect smoky bite. Bold, meaty, and irresistibly good.'},
-  {id:'meatpie', name:'Medium chicken shawarma (1 sausage )', price:3840, img:'image/image (11).webp', category:'snacks',description:'Juicy grilled chicken, Sausage, fresh veggies, and our signature creamy sauce, all wrapped in a soft tortilla and lightly toasted to perfection. Deliciously saucy, flavorful, and satisfying in every bite.'},
-  {id:'meatpie', name:'Beans & Dodo Burrito', price:3840, img:'image/image (12).webp', category:'snacks',description:'Juicy grilled chicken, Sausage, fresh veggies, and our signature creamy sauce, all wrapped in a soft tortilla and lightly toasted to perfection. Deliciously saucy, flavorful, and satisfying in every bite.'},
-  {id:'meatpie', name:'Chips & Salad Burrito', price:3840, img:'image/image (13).webp', category:'snacks',description:'Juicy grilled chicken, Sausage, fresh veggies, and our signature creamy sauce, all wrapped in a soft tortilla and lightly toasted to perfection. Deliciously saucy, flavorful, and satisfying in every bite.'},
 
   // --- 🥤 SOAPS / SOAP & SWALLOW COMBO ---
-  
-  
 ];
+MENU.forEach(item => {
+  item.finalPrice = Math.round(item.price * 0.8); // 20% discount
+});
+
 /* ----- Simple DOM helpers ----- */
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
@@ -142,7 +141,7 @@ function renderHome(){
 </section>
 `;
 }
-  
+
 function renderAbout(){
   return `
     <section style="margin-bottom:40px">
@@ -208,14 +207,14 @@ function renderAbout(){
 function renderMenu(){
   const categories = ['all', 'breakfast', 'lunch', 'dinner', 'snacks', 'drinks'];
 
-const categoryNames = {
-  all: 'All',
-  breakfast: 'Rice boal',
-  lunch: 'Pasta / Protein',
-  dinner: 'Pepper Soup / Swallow',
-  snacks: 'Shawarma / Burritos / Snacks',
-  drinks: 'Drinks'
-};
+  const categoryNames = {
+    all: 'All',
+    breakfast: 'Rice boal',
+    lunch: 'Pasta / Protein',
+    dinner: 'Pepper Soup / Swallow',
+    snacks: 'Shawarma / Burritos / Snacks',
+    drinks: 'Drinks'
+  };
   return `
     <section class="menu-section">
       <h2>Our Menu</h2>
@@ -236,28 +235,28 @@ const categoryNames = {
 }
 function showMenuItems(category){
   const grid = $('#menu-grid');
+  if(!grid) return;
   grid.innerHTML = '';
 
   const items = category === 'all'
     ? MENU
     : MENU.filter(i => i.category === category);
 
- grid.innerHTML = items.map(i => `
+  grid.innerHTML = items.map(i => `
   <div class="menu-item">
     <img src="${i.img}" alt="${i.name}">
     <h3>${i.name}</h3>
     <p class="menu-desc">${i.description || ''}</p>
-    <div class="price">₦${i.price.toLocaleString()}</div>
+    <div class="price">
+  <span class="old-price">₦${i.price.toLocaleString()}</span>
+  <span class="new-price">₦${applyDiscount(i.price).toLocaleString()}</span>
+  <span class="discount-badge">20% OFF</span>
+</div>
     <button class="add-btn" data-id="${i.id}">Add to Cart</button>
   </div>
 `).join('');
-
-  // re-wire add-to-cart buttons
-  $$('.add-btn').forEach(b =>
-    b.addEventListener('click', () => addToCart(b.dataset.id))
-  );
+  // NOTE: Do NOT attach per-button listeners here — we use delegated listener installed once.
 }
-  
 
 function renderContact(){
   return `
@@ -354,7 +353,8 @@ function updateCartUI(){
       `;
       container.appendChild(row);
     });
-    $$('.tiny', container).forEach(b => b.addEventListener('click', ()=> changeQty(b.dataset.id, Number(b.dataset.delta))));
+    // use container.querySelectorAll to scope correctly
+    container.querySelectorAll('.tiny').forEach(b => b.addEventListener('click', ()=> changeQty(b.dataset.id, Number(b.dataset.delta))));
     $$('#cart-total').forEach(t=> t.textContent = '₦' + cartTotal().toLocaleString());
   });
 }
@@ -551,12 +551,8 @@ function wirePage(){
   // Show ALL items by default when menu page loads
   if($('#menu-grid')) showMenuItems('all');
 
-  // add-to-cart inside other pages
-  $$('.add-btn').forEach(b =>
-    b.addEventListener('click', ()=> addToCart(b.dataset.id))
-  );
-
-  // cart controls
+  // Note: we NO LONGER attach per-button add-btn listeners here.
+  // Cart controls
   $$('.tiny').forEach(b => b.addEventListener('click', ()=> changeQty(b.dataset.id, Number(b.dataset.delta))));
   $$('#open-cart').forEach(b => b.addEventListener('click', showCartDrawer));
   $$('#close-cart').forEach(b => b.addEventListener('click', hideCartDrawer));
@@ -579,6 +575,26 @@ function init(){
   updateCartUI();
   initNavToggle();
   initTheme();
+
+  // Install a single delegated click listener for Add-to-Cart buttons (only once)
+  if(!window._grubnmore_delegation_installed){
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest && e.target.closest('.add-btn');
+      if(btn){
+        const id = btn.dataset.id;
+        if(id) addToCart(id, 1);
+      }
+      // tiny buttons in cart (plus/minus) are handled by updateCartUI which attaches listeners,
+      // but as a fallback we can also handle them here:
+      const tiny = e.target.closest && e.target.closest('.tiny');
+      if(tiny){
+        const delta = Number(tiny.dataset.delta || 0);
+        const id = tiny.dataset.id;
+        if(id && delta) changeQty(id, delta);
+      }
+    });
+    window._grubnmore_delegation_installed = true;
+  }
 
   // react to hash changes
   window.addEventListener('hashchange', router);
